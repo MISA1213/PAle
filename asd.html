@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sabor & Leña - Experiencia culinaria única. Sabores auténticos de la cocina tradicional con toque moderno.">
+    <meta name="theme-color" content="#1a1612">
+    <meta property="og:title" content="Sabor & Leña | Restaurante Gourmet">
+    <meta property="og:description" content="Sabores auténticos de la cocina tradicional">
+    <meta property="og:type" content="website">
+    <title>Sabor & Leña | Restaurante Gourmet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #1a1612;
+            --bg-secondary: #252019;
+            --bg-card: #2d2520;
+            --text-primary: #f5f0e8;
+            --text-secondary: #b8a99a;
+            --text-muted: #7a6b5e;
+            --accent-terra: #e07a5f;
+            --accent-terra-light: #f09478;
+            --accent-terra-dark: #c45a42;
+            --accent-gold: #d4a373;
+            --gradient-warm: linear-gradient(135deg, #e07a5f 0%, #d4a373 100%);
+            --gradient-cream: linear-gradient(135deg, #faedcd 0%, #e8d5b7 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* === HEADER === */
+        header {
+            background-color: var(--bg-primary);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(224, 122, 95, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(26, 22, 18, 0.98);
+            padding: 1rem 5%;
+            border-bottom-color: rgba(224, 122, 95, 0.2);
+        }
+
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.75rem;
+            color: var(--accent-terra);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-terra);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-reserve {
+            background-color: var(--accent-terra);
+            color: var(--bg-primary);
+            padding: 0.75rem 1.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reserve:hover {
+            background-color: var(--accent-terra-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(224, 122, 95, 0.3);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* === HERO === */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            filter: brightness(0.4) saturate(1.1);
+            transform: translateY(0);
+            transition: transform 0.1s linear;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(180deg, rgba(26, 22, 18, 0.3) 0%, rgba(26, 22, 18, 0.7) 100%),
+                radial-gradient(ellipse at 50% 80%, rgba(224, 122, 95, 0.15) 0%, transparent 60%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            color: var(--gradient-cream);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        .btn-hero {
+            display: inline-block;
+            background-color: var(--accent-terra);
+            color: var(--bg-primary);
+            padding: 1rem 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero:hover {
+            background-color: var(--accent-terra-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(224, 122, 95, 0.4);
+        }
+
+        /* === MENU SECTION === */
+        .featured {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--accent-terra);
+            margin: 1rem auto 0;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 3.5rem;
+            font-weight: 300;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+        }
+
+        .menu-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-warm);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(224, 122, 95, 0.15);
+        }
+
+        .menu-item:hover::after {
+            transform: scaleX(1);
+        }
+
+        .menu-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-item:hover .menu-img {
+            transform: scale(1.08);
+        }
+
+        .menu-info {
+            padding: 1.5rem;
+        }
+
+        .dish-name {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+        }
+
+        .dish-name h3 {
+            font-size: 1.35rem;
+            color: var(--text-primary);
+        }
+
+        .price {
+            color: var(--accent-terra);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .dish-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* === ABOUT === */
+        .about {
+            background-color: var(--bg-secondary);
+            padding: 6rem 5%;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            position: relative;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            filter: brightness(0.95) contrast(1.05);
+        }
+
+        .about-img::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid var(--accent-terra);
+            border-radius: 8px;
+            z-index: -1;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .about-text h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--accent-terra);
+            margin-top: 1rem;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(224, 122, 95, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-terra);
+            font-size: 1.1rem;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* === RESERVATION === */
+        .reservation {
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            text-align: center;
+        }
+
+        .reservation h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--gradient-cream);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reservation-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-terra);
+            box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23b8a99a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+
+        button[type="submit"] {
+            background-color: var(--accent-terra);
+            color: var(--bg-primary);
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--accent-terra-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(224, 122, 95, 0.35);
+        }
+
+        /* === FOOTER === */
+        footer {
+            background-color: #111111;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-col p,
+        .footer-col a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-terra);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-terra);
+            transform: translateY(-3px);
+        }
+
+        .social-links a svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 968px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-img::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 5%;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .footer-content {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Focus states */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 2px solid var(--accent-terra);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="logo">Sabor & Leña</div>
+        <nav>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#reservas" class="btn-reserve">Reservar Mesa</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" id="hamburger" aria-label="Menú" role="button" tabindex="0">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="" class="hero-bg" id="hero-bg" loading="eager">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Experiencia Culinaria Única</h1>
+            <p>Descubre los sabores auténticos de la cocina tradicional con un toque moderno. Ingredientes frescos, pasión en cada plato.</p>
+            <a href="#menu" class="btn-hero">Ver Menú</a>
+        </div>
+    </section>
+
+    <section id="menu" class="featured">
+        <h2 class="section-title">Platos Favoritos</h2>
+        <p class="section-subtitle">Los platos más solicitados por nuestros comensales</p>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Bowl Saludable" class="menu-img" loading="lazy" width="400" height="220">
+                <div class="menu-info">
+                    <div class="dish-name">
+                        <h3>Bowl Saludable</h3>
+                        <span class="price">$12.00</span>
+                    </div>
+                    <p class="dish-desc">Quinoa, aguacate, huevo poché y aderezo de la casa.</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Filet Mignon" class="menu-img" loading="lazy" width="400" height="220">
+                <div class="menu-info">
+                    <div class="dish-name">
+                        <h3>Filet Mignon</h3>
+                        <span class="price">$28.00</span>
+                    </div>
+                    <p class="dish-desc">Corte premium a la parrilla con puré de trufas.</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pizza Artesanal" class="menu-img" loading="lazy" width="400" height="220">
+                <div class="menu-info">
+                    <div class="dish-name">
+                        <h3>Pizza Artesanal</h3>
+                        <span class="price">$18.00</span>
+                    </div>
+                    <p class="dish-desc">Masa madre, mozzarella di bufala y albahaca fresca.</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pancakes" class="menu-img" loading="lazy" width="400" height="220">
+                <div class="menu-info">
+                    <div class="dish-name">
+                        <h3>Pancakes Deluxe</h3>
+                        <span class="price">$14.00</span>
+                    </div>
+                    <p class="dish-desc">Con frutas frescas, miel de agave y nueces.</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Ensalada César" class="menu-img" loading="lazy" width="400" height="220">
+                <div class="menu-info">
+                    <div class="dish-name">
+                        <h3>Ensalada César</h3>
+                        <span class="price">$11.00</span>
+                    </div>
+                    <p class="dish-desc">Lechuga romana, pollo, parmesan y crutones.</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Hamburguesa" class="menu-img" loading="lazy" width="400" height="220">
+                <div class="menu-info">
+                    <div class="dish-name">
+                        <h3>Hamburguesa Clásica</h3>
+                        <span class="price">$15.00</span>
+                    </div>
+                    <p class="dish-desc">Carne Angus, queso cheddar y vegetales frescos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="about">
+        <div class="about-container">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Interior Restaurante" loading="lazy" width="500" height="400">
+            </div>
+            <div class="about-text">
+                <h2>Nuestra Historia</h2>
+                <p>Fundado en 2010, Sabor & Leña nació con la misión de reconectar a las personas con la comida real. Nuestros chefs seleccionan cada mañana los mejores productos locales para crear platos que no solo alimentan el cuerpo, sino también el alma.</p>
+                <p>Creemos en la cocina lenta, en los ingredientes de temporada y en el ambiente cálido que hace que cada visita se sienta como un hogar.</p>
+                <div class="about-features">
+                    <div class="feature">
+                        <div class="feature-icon">🌿</div>
+                        <span class="feature-text">Ingredientes frescos</span>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👨‍🍳</div>
+                        <span class="feature-text">Chefs expertos</span>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💛</div>
+                        <span class="feature-text">Atención cálida</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reservas" class="reservation">
+        <h2>Reserva tu Mesa</h2>
+        <p class="reservation-subtitle">Vive la experiencia Sabor & Leña</p>
+        <form class="reservation-form" action="#" method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Tu nombre" required aria-label="Nombre">
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="Teléfono" required aria-label="Teléfono">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="date" name="date" required aria-label="Fecha">
+                </div>
+                <div class="form-group">
+                    <select name="time" required aria-label="Hora">
+                        <option value="">Hora</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option>
+                        <option value="19:00">19:00</option>
+                        <option value="19:30">19:30</option>
+                        <option value="20:00">20:00</option>
+                        <option value="20:30">20:30</option>
+                        <option value="21:00">21:00</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <select name="guests" required aria-label="Comensales">
+                    <option value="">Número de comensales</option>
+                    <option value="2">2 personas</option>
+                    <option value="3">3 personas</option>
+                    <option value="4">4 personas</option>
+                    <option value="5">5 personas</option>
+                    <option value="6">6 personas</option>
+                    <option value="7+">7+ personas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea name="message" placeholder="¿Alguna solicitud especial?" rows="3" aria-label="Mensaje"></textarea>
+            </div>
+            <button type="submit">Confirmar Reserva</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Sabor & Leña</h4>
+                <p>Donde cada comida se convierte en una experiencia inolvidable.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Horario</h4>
+                <p>Lunes - Jueves: 13:00 - 23:00</p>
+                <p>Viernes - Domingo: 13:00 - 00:00</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <a href="tel:+34900123456">+34 900 123 456</a>
+                <a href="mailto:hola@saboryleña.com">hola@saboryleña.com</a>
+                <p>Calle Principal 123, Ciudad</p>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces</h4>
+                <a href="#menu">Menú</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#reservas">Reservas</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Sabor & Leña. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const header = document.getElementById('header');
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const heroBg = document.getElementById('hero-bg');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            const scrollY = window.scrollY;
+            heroBg.style.transform = `translateY(${scrollY * 0.3}px)`;
+        });
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        hamburger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
